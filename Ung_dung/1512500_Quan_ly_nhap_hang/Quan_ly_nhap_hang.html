@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+    <link rel="stylesheet" href="main.css">
+
+    <!-- Bootstrap -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../bootstrap/js/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.min.css">
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <!-- Bootstrap -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Quan ly nhap hang</title>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="background-image: url('../header.jpg')">
+                <img src="../Media/PET.png" alt="Anh pet" class="img-responsive center-block">
+                <h2 class="text-center" id="Ten_cua_hang"></h2>
+            </div>
+
+        </div>
+
+        <hr>
+        <div class="row">
+
+            <!-- Selecter loai sp -->
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <p>Xem theo: </p>
+                <select name="LoaiTV" id="LOAI_SP" onchange="onChanging()" class="form-control">
+                    <option value="all" selected="selected">Tất cả</option>
+                </select>
+            </div>
+            <!-- End Selector loai sp -->
+
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                <p>Số lượng Tồn</p>
+                <p id="SO_LUONG_TON"></p>
+            </div>
+
+            
+            <!-- Cap nhan don gia -->
+            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                <p>Cập nhật đơn giá nhập</p>
+                <span>Mã số: </span>
+                <input type="text" id="MA_SO_SP">
+                <span>Đơn giá mới: </span>
+                <input type="text" id="DON_GIA_NHAP_SP">
+                <button type="submit" id="CAP_NHAT">Cập nhật</button>
+            </div>
+            <!-- Cap nhat don giá -->
+
+        </div>
+        <hr>
+
+        <!-- Danh sach san pham -->
+        <div class="row" id="KET_QUA">
+
+        </div>
+        <!-- End Danh sach san pham -->
+    </div>
+
+</body>
+
+</html>
+
+<script src="main.js"></script>
+<script>
+    var Danh_sach;
+    var SO_LUONG_TON = document.getElementById("SO_LUONG_TON");
+    var KET_QUA = document.getElementById("KET_QUA");
+    var TEN_CUA_HANG = document.getElementById("Ten_cua_hang");
+    
+    window.onload = function NapDuLieuBanDau() {
+        var Root = get_Du_lieu_XML();
+        var CuaHang = Root.getElementsByTagName("Cua_hang")[0];
+        TEN_CUA_HANG.innerHTML = CuaHang.getAttribute("Ten");
+
+        Danh_sach = Root.getElementsByTagName("Tivi");
+        add_Loai_San_Pham(Danh_sach);
+        SO_LUONG_TON.innerHTML = tinh_So_Luong_ton(Danh_sach, "all");
+        KET_QUA.appendChild(Tao_Danh_Sach(Danh_sach));
+    }
+
+    function onChanging() {
+        var SO_LUONG_TON = document.getElementById("SO_LUONG_TON");
+        var LOAI_SP = document.getElementById("LOAI_SP");
+        var mssp = LOAI_SP.value;
+        SO_LUONG_TON.innerHTML = tinh_So_Luong_ton(Danh_sach,mssp);
+        var Danh_sach2 = Tao_Danh_sach_mat_hang_theo_ma_so(Danh_sach,mssp);
+        KET_QUA.innerHTML = "";
+        KET_QUA.appendChild(Tao_Danh_Sach(Danh_sach2));        
+    }
+
+</script>

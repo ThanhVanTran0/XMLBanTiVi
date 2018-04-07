@@ -1,0 +1,24 @@
+.bannerNode {
+    background-image: url('../header.jpg');
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    padding: 1px;
+}
+
+.grid-item {
+    padding: 15px;
+    font-size: 20px;
+    text-align: center;
+    background-color: white;
+}
+
+#gridSelect option {
+    width: 50px;
+}
+
+div.grid-item:hover {
+    background-color: rgb(236, 236, 236);
+}

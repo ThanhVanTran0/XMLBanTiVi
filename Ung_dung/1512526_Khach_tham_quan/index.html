@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Intital Include -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <!-- Intital Include -->
+
+    <!-- Bootstrap -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../bootstrap/js/jquery-3.3.1.min.js"></script>    
+    <link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.min.css">
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <!-- Bootstrap -->
+
+    <title>Cửa hàng TV PET</title>
+    <!-- Header -->
+    <div align="center">
+        <div class="bannerNode">
+            <img id="logo" style="margin:10px" class="img-rounded" />
+            <p id="title" style="margin:5px;font-size:50px;color:yellow;font-weight:bold;
+            text-shadow:-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black" />
+        </div>
+    </div>
+    <!-- Header -->
+
+</head>
+
+<body>
+    <script src="main.js"></script>
+    <script>
+        GetData()
+    </script>
+
+    <br>
+    <div style="margin: 0px 200px">
+
+        <!-- Item per row -->
+        <div align="right">
+            <div style="font-size:20px;font-weight:bold;
+                text-shadow:-1px 0 white, 0 1px white, 1px 0 white, 0 -1px white">Số mặt hàng trên dòng</div>
+            <div class="dropdown">
+                
+                <select style="font-size:15px" id="gridSelect" onchange="ChangeGrid()">
+                    <option>1</option>
+                    <option>3</option>
+                    <option selected>5</option>
+                    <option>6</option>
+                </select>
+            </div>
+        </div>
+        <!-- Item per row -->
+
+        <div class="grid-container" style="grid-template-columns:200px auto">
+
+            <!-- Show products by type -->
+            <div class="panel panel-primary" style="margin-right:3px">
+                <div class="panel-heading" style="font-weight:bold;font-size:15px">Xem các loại mặt hàng</div>
+
+                <!-- <div align="center" style="font-size:18px;font-weight:bold;margin:1px">Xem các loại mặt hàng</div> -->
+                <div>
+                    <form id="viewForm" method="get" onsubmit="ChangeView();return false">
+                        <div align="center">
+                            <button type="submit" margin="50px" class="btn btn-primary">OK</button>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- Show products by type -->
+
+            <!-- Product List -->
+            <div id="mainGrid" class="grid-container">
+
+            </div>
+            <!-- Product List -->
+
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>

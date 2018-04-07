@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+    <link rel="stylesheet" href="main.css">
+
+    <!-- Bootstrap -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../bootstrap/js/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.min.css">
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <!-- Bootstrap -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Quan ly nhap hang</title>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="background-image: url('../header.jpg')">
+                <img src="../Media/PET.png" alt="Anh pet" class="img-responsive center-block">
+                <h2 class="text-center" id="Ten_cua_hang"></h2>
+            </div>
+
+        </div>
+
+        <hr>
+        <div class="row">
+
+            <!-- Selecter loai sp -->
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <p>Xem theo: </p>
+                <select name="LoaiTV" id="LOAI_SP" onchange="onChanging()" class="form-control">
+                    <option value="all" selected="selected">Tất cả</option>
+                </select>
+            </div>
+            <!-- End Selector loai sp -->
+
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                <p>Số lượng Tồn</p>
+                <p id="SO_LUONG_TON"></p>
+            </div>
+        </div>
+
+        <!-- Phieu ban hang -->
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <p></p>
+                <p>Phiếu bán hàng</p>
+                <span>Họ tên</span>
+                <input type="text" id="HO_TEN">
+                <span>Ngày </span>
+                <input type="date" name="date" id="NGAY_BAN">
+                <span>Số lượng</span>
+                <input type="text" id="SO_LUONG_BAN">
+                <span>Mã số</span>
+                <input type="text" id="MA_SO">
+                <button type="button" class="btn btn-default" onclick="Tinh_Tien()">Tính tiền</button>
+                <button type="button" class="btn btn-default" onclick="XoaDuLieuBan()">Clear</button>
+
+            </div>
+        </div>
+        <!-- Phieu ban hang -->
+
+        <div class="row">
+            <p></p>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-center">Tivi</div>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-center">Số lượng</div>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-center">Đơn Giá</div>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-center">Tổng Tiền</div>
+        </div>
+
+    </div>
+
+    <!-- Thong tin phieu ban -->
+    <div class="container" id="THONG_TIN_PHIEU_BAN">
+
+    </div>
+    <!-- Thong tin phieu ban -->
+
+
+    <!-- Danh sach san pham -->
+    <div class="container">
+        <hr>
+        <div class="row" id="KET_QUA">
+
+        </div>
+    </div>
+
+    <!-- End Danh sach san pham -->
+
+</body>
+
+</html>
+
+<script src="main.js"></script>
+<script>
+    var Danh_sach;
+    var SO_LUONG_TON = document.getElementById("SO_LUONG_TON");
+    var KET_QUA = document.getElementById("KET_QUA");
+    var TEN_CUA_HANG = document.getElementById("Ten_cua_hang");
+    var THONG_TIN_PHIEU_BAN = document.getElementById("THONG_TIN_PHIEU_BAN");
+    var HO_TEN = document.getElementById("HO_TEN");
+    var NGAY = document.getElementById("NGAY_BAN");
+    var SO_LUONG_BAN = document.getElementById("SO_LUONG_BAN");
+    var MA_SO = document.getElementById("MA_SO");
+
+    window.onload = function NapDuLieuBanDau() {
+        var Root = get_Du_lieu_XML();
+        var CuaHang = Root.getElementsByTagName("Cua_hang")[0];
+        TEN_CUA_HANG.innerHTML = CuaHang.getAttribute("Ten");
+
+        Danh_sach = Root.getElementsByTagName("Tivi");
+        add_Loai_San_Pham(Danh_sach);
+        SO_LUONG_TON.innerHTML = tinh_So_Luong_ton(Danh_sach, "all");
+        KET_QUA.appendChild(Tao_Danh_Sach(Danh_sach));
+    }
+
+</script>
