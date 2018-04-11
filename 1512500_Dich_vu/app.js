@@ -37,7 +37,7 @@ var Dich_vu = http.createServer((req, res) => {
 		var ma_so = tham_so.id;
 		var Don_gia_nhap = tham_so.nhap;
 		if (Don_gia_nhap != null) {
-			var kt = XL_NV.CapNhatDonGia(Du_Lieu, 'Don_gia_Nhap', ma_so, Don_gia_moi);
+			var kt = XL_NV.CapNhatDonGia(Du_Lieu, 'Don_gia_Nhap', ma_so, Don_gia_nhap);
 			if (kt == true) {
 				if (Luu_tru.Luu_du_lieu(Du_Lieu)) {
 					res.writeHead(200, {
@@ -49,7 +49,7 @@ var Dich_vu = http.createServer((req, res) => {
 			} else {
 				var Don_gia_ban = tham_so.xuat;
 				if (Don_gia_ban != null) {
-					var kt = XL_NV.CapNhatDonGia(Du_Lieu, 'Don_gia_Nhap', ma_so, Don_gia_moi);
+					var kt = XL_NV.CapNhatDonGia(Du_Lieu, 'Don_gia_Nhap', ma_so, Don_gia_ban);
 					if (kt == true) {
 						if (Luu_tru.Luu_du_lieu(Du_Lieu)) {
 							res.writeHead(200, {
@@ -65,11 +65,32 @@ var Dich_vu = http.createServer((req, res) => {
 	}
 	else if(cmd === 'write') {
 		var mode = tham_so.mode;
+		var ma_so = tham_so.id;
+		var so_luong = tham_so.num;
+		var ngay = tham_so.date;
 		if(mode === 'bhang') {
-
+			var kt = XL_NV.ThemVaCapNhatDanhSachBan(Du_Lieu,ma_so,so_luong,ngay);
+			if (kt == true) {
+				if (Luu_tru.Luu_du_lieu(Du_Lieu)) {
+					res.writeHead(200, {
+						'Content-Type': 'text/plain',
+						'Access-Control-Allow-Origin': '*'
+					});
+					res.end();
+				}
+			}
 		}
 		else if(mode === 'nhang') {
-			
+			var kt = XL_NV.ThemVaCapNhatDanhSachNhap(Du_Lieu,ma_so,so_luong,ngay);
+			if (kt == true) {
+				if (Luu_tru.Luu_du_lieu(Du_Lieu)) {
+					res.writeHead(200, {
+						'Content-Type': 'text/plain',
+						'Access-Control-Allow-Origin': '*'
+					});
+					res.end();
+				}
+			}
 		}
 	}
 }).listen(port, (err) => {

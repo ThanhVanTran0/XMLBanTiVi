@@ -38,7 +38,6 @@
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                 <p>Xem theo: </p>
                 <select name="LoaiTV" id="LOAI_SP" onchange="onChanging()" class="form-control">
-                    <option value="all" selected="selected">Tất cả</option>
                 </select>
             </div>
             <!-- End Selector loai sp -->
@@ -56,7 +55,7 @@
                 <input type="text" id="MA_SO_SP">
                 <span>Đơn giá mới: </span>
                 <input type="text" id="DON_GIA_NHAP_SP">
-                <button type="submit" id="CAP_NHAT">Cập nhật</button>
+                <button type="submit" id="CAP_NHAT" onclick="CapNhatDonGia()">Cập nhật</button>
             </div>
             <!-- Cap nhat don giá -->
 
@@ -76,30 +75,12 @@
 
 <script src="main.js"></script>
 <script>
-    var Danh_sach;
     var SO_LUONG_TON = document.getElementById("SO_LUONG_TON");
     var KET_QUA = document.getElementById("KET_QUA");
     var TEN_CUA_HANG = document.getElementById("Ten_cua_hang");
-    
-    window.onload = function NapDuLieuBanDau() {
-        var Root = get_Du_lieu_XML();
-        var CuaHang = Root.getElementsByTagName("Cua_hang")[0];
-        TEN_CUA_HANG.innerHTML = CuaHang.getAttribute("Ten");
+    var MA_SO_SP = document.getElementById("MA_SO_SP");
+    var DON_GIA_NHAP_SP = document.getElementById("DON_GIA_NHAP_SP");
 
-        Danh_sach = Root.getElementsByTagName("Tivi");
-        add_Loai_San_Pham(Danh_sach);
-        SO_LUONG_TON.innerHTML = tinh_So_Luong_ton(Danh_sach, "all");
-        KET_QUA.appendChild(Tao_Danh_Sach(Danh_sach));
-    }
-
-    function onChanging() {
-        var SO_LUONG_TON = document.getElementById("SO_LUONG_TON");
-        var LOAI_SP = document.getElementById("LOAI_SP");
-        var mssp = LOAI_SP.value;
-        SO_LUONG_TON.innerHTML = tinh_So_Luong_ton(Danh_sach,mssp);
-        var Danh_sach2 = Tao_Danh_sach_mat_hang_theo_ma_so(Danh_sach,mssp);
-        KET_QUA.innerHTML = "";
-        KET_QUA.appendChild(Tao_Danh_Sach(Danh_sach2));        
-    }
+    window.onload = NapDuLieuBanDau();
 
 </script>
